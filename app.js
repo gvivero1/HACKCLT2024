@@ -4,6 +4,7 @@ const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const config = require("./config.js");
 const session = require('express-session');
+const blueprintRoutes = require('./routes/blueprintRoutes');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use((req,res,next)=>{
 })
 //defining routes
 app.use("/users", userRoutes);
+app.use("/blueprints", blueprintRoutes);
 
 app.use((req, res, next) => {
   let err = new Error("The server cannot locate " + req.url);
