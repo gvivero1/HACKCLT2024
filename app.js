@@ -1,7 +1,9 @@
 const express = require('express');
 const userRoutes = require("./routes/userRoutes");
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const config = require("./config.js");
+const session = require('express-session');
 
 const app = express();
 
@@ -27,8 +29,19 @@ mongoose.connect(uri, {})
     })
     .catch(err => console.log(err.message));
 
+    app.use(session({
+      secret: "iajsdhvdbi",
+      resave: false,
+      saveUninitialized: false,
+      store: new MongoStore({mongoUrl: uri}),
+      cookie: {maxAge: 60 * 60 * 1000}
 
+    }))
 
+app.use((req,res,next)=>{
+  res.locals.user = req.session.user || null;
+  next();
+})
 //defining routes
 app.use("/users", userRoutes);
 
