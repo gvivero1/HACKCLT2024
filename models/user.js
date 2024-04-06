@@ -38,6 +38,10 @@ userSchema.methods.addExperience = function(expToAdd){
   user.experiences.push(expToAdd);
 };
 
+userSchema.methods.addSkills = function([skills]){
+  let user = this;
+  user.skills = skills;
+};
 
 const User = mongoose.model("user", userSchema);
 
