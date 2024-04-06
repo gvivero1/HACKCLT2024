@@ -1,8 +1,9 @@
-import { initializeApp } from "firebase/app"
 import  { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import { ref as firebaseRef, getStorage } from 'firebase/storage'
 import { getAnalytics } from "firebase/analytics";
+
+const firebase = require('firebase');
 
 const firebaseConfig = {
     apiKey: "AIzaSyAQlSECDQuV0Y3kpjPK2BLfGlm53vNPJ-s",
@@ -14,14 +15,18 @@ const firebaseConfig = {
     measurementId: "G-64PYGTMRJ7"
 };
 
-const app = initializeApp(firebaseConfig)
+const app = firebase.initializeApp(firebaseConfig)
 const auth = getAuth(app) // User authentication
 const db = getFirestore(app) // Database
 const analytics = getAnalytics(app); // Analytics
 
-// Image storage constants and references
+// Storage constants and references
 const storage = getStorage(app)
 
 // create references to storage here
-
-export { auth, db, firebaseRef, storage, analytics } 
+module.exports = {
+    auth,
+    db,
+    analytics,
+    storage
+};
