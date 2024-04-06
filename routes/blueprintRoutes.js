@@ -17,6 +17,6 @@ router.post('/job', controller.createJob); // take job details, create a new job
 
 router.get('/create', controller.getLoading); // shows a loading screen while ai does its job
 
-router.post('/create', controller.addBlueprint); // show the newly created blueprint w/ next steps, timeline, etc
+router.post('/create', controller.finishBlueprint); // show the newly created blueprint w/ next steps, timeline, etc
 
 module.exports = router;
