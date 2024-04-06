@@ -18,8 +18,10 @@
   "homepage": "https://github.com/gvivero1/HACKCLT-2024#readme",
   "dependencies": {
     "@google-cloud/firestore": "^7.6.0",
+    "bcrypt": "^5.1.1",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "firebase": "^10.10.0",
     "method-override": "^3.0.0",
     "nodemon": "^3.1.0"
   }
