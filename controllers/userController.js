@@ -15,7 +15,7 @@ exports.getNew = (req, res, next) => {
 
 exports.postNew = async (req, res, next) => {
     //code to create a new user account
-    const {email, password } = req.body;
+    const {email, password } = req.body;   
     const user = new User({ email, password });
     console.log(user);
 
