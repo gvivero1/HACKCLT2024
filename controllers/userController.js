@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Experience = require('../models/experience');
 exports.getUserLogin = (req, res, next) => {
     if(!req.session.User){
         res.render("./user/login");
@@ -52,5 +53,28 @@ exports.login = async (req, res) => {
         // Handle error
         console.error('Login error:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+exports.getSkills = (req, res, next) => {
+    res.render("./user/skills");
+}
+
+exports.addSkills = async (req, res, next) => {
+    const skills  = req.body.skills;
+    const eduGpa = req.body.eduGpa;
+    const highestEdu = req.body.highestEdu;
+    const user = await User.findById(req.session.user);
+    const exper = new Experience(req.body.years, req.body.role, req.body.responsibilities, req.body.experienceName, req.body.location);
+    
+    user.skills = skills;
+    user.eduGpa = eduGpa;
+    user.highestEdu = highestEdu;
+    user.experiences.push(exper);
+    try {
+        await user.save();
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).json({ error });
     }
 };

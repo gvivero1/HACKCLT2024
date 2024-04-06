@@ -12,4 +12,8 @@ router.get("/new", controller.getNew);
 
 router.post("/new", controller.postNew);
 
+router.get("/getSkills", controller.getSkills);
+
+router.post("/addSkills", controller.addSkills);
+
 module.exports = router;
