@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
 };
 
 exports.getSkills = (req, res, next) => {
-    res.render("./user/skills");
+    res.render("./user/getSkills");
 }
 
 exports.addSkills = async (req, res, next) => {
