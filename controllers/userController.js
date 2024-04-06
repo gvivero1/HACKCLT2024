@@ -23,7 +23,7 @@ exports.postNew = async (req, res, next) => {
         await user.save();
         // Flash Success 
         req.flash('success', 'Account has been created');
-        res.redirect('/users/login');
+        res.redirect('/user/login');
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
 
         if (!user) {
             // Handle invalid user
-            return res.redirect('/users/login');
+            return res.redirect('/user/login');
         }
 
         const isPasswordValid = await user.checkPassword(password);
@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
             return res.redirect('/');
         } else {
             // Handle invalid password
-            return res.redirect('/users/login');
+            return res.redirect('/user/login');
         }
     } catch (error) {
         // Handle error
@@ -57,11 +57,13 @@ exports.login = async (req, res) => {
 };
 
 exports.getSkills = (req, res, next) => {
-    if(req.session.user){
-        res.render("/users/getSkills");
-    }else{
-        res.redirect('/users/login');
+    if(req.session.User){
+        res.render("./user/getSkills");
+    } else{
+        res.redirect('/users/login')
     }
+        
+    
     
 }
 
