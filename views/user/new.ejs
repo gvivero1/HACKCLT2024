@@ -1,12 +1,66 @@
-<div>
+<%- include('../partials/header.ejs')%>
+
+<div class="container">
     <h1>Signup</h1>
     <form action="/users/new" method="POST" class="user-form">
-    <label for="email"> Email:</label>
-    <input type="email" id="email" name="email" placeholder="Email" required/>
-    <br />
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" placeholder="Password" required/>
-    <br />
-    <input type="submit" value="Sumbit" />
+        <div class="form-group">
+            <label for="email"> Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email" required/> 
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Password" required/>
+    </div>
+    <div class="form-group"> 
+        <input type="submit" value="Submit" class="btn"/>
+    </div>
     </form>
 </div>
+
+<style>
+    .container {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 20px 50px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #15639f;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0d4a75;
+    }
+</style>
