@@ -27,7 +27,8 @@ module.exports = {
           email,
           password
         });
-        return userRecord;
+        const userId = userRecord.uid;
+        return { userRecord, userId };
       } catch (error) {
         throw error; // Handle errors as needed
       }

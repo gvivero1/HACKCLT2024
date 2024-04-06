@@ -24,6 +24,9 @@ const analytics = getAnalytics(app); // Analytics
 const storage = getStorage(app)
 
 // create references to storage here
+// const userRef = firebaseRef(db, 'users')
+
+
 module.exports = {
     auth,
     db,
