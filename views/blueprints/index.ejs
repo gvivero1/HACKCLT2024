@@ -1,0 +1,27 @@
+<div class="container">
+    <!-- create this exact code but using ejs and a bluepring object -->
+    <% for(let i = 0; i < blueprints.length; i++) { %>
+      <% if(i % 4 === 0) { %>
+        <div class="row" id="index-items">
+      <% } %>
+      <div class="item col-6" onclick="location.href='/blueprints/<%=blueprints[i].id%>'" style="cursor: pointer;">
+        <img src="/" alt="some image here" />
+        <p class="blueprint-name">
+          <strong>
+            <%let name = blueprints[i].blueprintName;%>
+              <%if(name.length > 19) {%>
+                <%name = name.substring(0, 19) + "...";%>
+              <%}%>
+            <%=name.toUpperCase()%>
+          </strong>
+        </p>
+        <p>Experience: <strong><%=blueprints[i].experiences%></strong></p>
+        <hr />
+        <strong><p class="">Something here</p></strong>
+        
+      </div>
+      <% if(i % 4 === 3 || i === blueprints.length - 1) { %>
+        </div>
+      <% } %>
+    <% } %>
+  </div>
