@@ -58,9 +58,9 @@ exports.login = async (req, res) => {
 
 exports.getSkills = (req, res, next) => {
     if(req.session.user){
-        res.render("./user/getSkills");
+        res.render("/users/getSkills");
     }else{
-        res.redirect('./user/login');
+        res.redirect('/users/login');
     }
     
 }
