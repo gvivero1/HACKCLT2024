@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', controller.index); // show all blueprints
 
-router.get('/:id', controller.show); // show a single blueprint
+
 
 router.get('/start', controller.showStart); // show the create blueprint start screen - input blueprint name and add experiences
 
@@ -19,4 +19,5 @@ router.get('/create', controller.getLoading); // shows a loading screen while ai
 
 router.post('/create', controller.finishBlueprint); // show the newly created blueprint w/ next steps, timeline, etc
 
+router.get('/:id', controller.show); // show a single blueprint
 module.exports = router;
