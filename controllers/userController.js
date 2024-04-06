@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const Experience = require('../models/experience');
+const experience = require('../models/experience');
 exports.getUserLogin = (req, res, next) => {
     if(!req.session.User){
         res.render("./user/login");
@@ -57,7 +57,12 @@ exports.login = async (req, res) => {
 };
 
 exports.getSkills = (req, res, next) => {
-    res.render("./user/getSkills");
+    if(req.session.user){
+        res.render("./user/getSkills");
+    }else{
+        res.redirect('./user/login');
+    }
+    
 }
 
 exports.addSkills = async (req, res, next) => {
@@ -65,9 +70,9 @@ exports.addSkills = async (req, res, next) => {
     const eduGpa = req.body.eduGpa;
     const highestEdu = req.body.highestEdu;
     let user = await User.findById(req.session.user);
-    const exper = new Experience(req.body.years, req.body.role, req.body.responsibilities, req.body.experienceName, req.body.location);
-    
-    user.skills = skills;
+    const exper = {years: req.body.years, role: req.body.role, responsibilities: req.body.responsibilities, experienceName: req.body.experienceName, location: req.body.location};
+    console.log(skills);
+    user.skills.push(skills);
     user.eduGpa = eduGpa;
     user.highestEdu = highestEdu;
     user.experiences.push(exper);
