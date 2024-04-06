@@ -64,7 +64,7 @@ exports.addSkills = async (req, res, next) => {
     const skills  = req.body.skills;
     const eduGpa = req.body.eduGpa;
     const highestEdu = req.body.highestEdu;
-    const user = await User.findById(req.session.user);
+    let user = await User.findById(req.session.user);
     const exper = new Experience(req.body.years, req.body.role, req.body.responsibilities, req.body.experienceName, req.body.location);
     
     user.skills = skills;
