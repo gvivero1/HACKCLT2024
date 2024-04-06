@@ -8,13 +8,10 @@ const blueprintId = "";
 exports.index = async (req, res) => {
     let user = await User.findById(req.session.user); // get current user
     let blueprintIds = user.blueprintIds; // get the list of the user's blueprint ids
-    let blueprints = new [Blueprint]; // assign new array of blueprints
-    for(let i = 0; i < blueprintIds.length; i++){
-        Blueprint.findById(blueprintIds[i]).then((blueprint) => {
-            blueprints.push(blueprint); // find all the user's blueprints and add them to the created array
-        });
-    }
-    res.render('/blueprint/index', blueprints); // render the page of list of blueprints and pass the blueprints array
+
+    let blueprints = await Promise.all(blueprintIds.map(id => Blueprint.findById(id)));
+
+    res.render('blueprints/index', {blueprints}); // render the page of list of blueprints and pass the blueprints array
 };
 
 // show one specific blueprint
@@ -22,7 +19,7 @@ exports.show = (req, res, next) => {
     let blueprintId = req.params.id;
     Blueprint.findById(blueprintId).then((blueprint) => {
         if(blueprint){
-            res.render('/blueprint/show', blueprint)
+            res.render('/blueprints/show', blueprint)
         } else{
             let err = new Error("Blueprint not found");
             err.status = 404;
