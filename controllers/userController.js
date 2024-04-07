@@ -15,7 +15,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.getUserLogin = (req, res, next) => {
     if(!req.session.User){
-        res.render("./user/login");
+        res.render("./user/login", {id: req.session.user});
     }else{
         res.redirect('/');
     }
@@ -23,15 +23,14 @@ exports.getUserLogin = (req, res, next) => {
 };
 
 exports.getNew = (req, res, next) => {
-    res.render("./user/new");
+    res.render("./user/new", {id: req.session.user});
 }
 
 exports.postNew = async (req, res, next) => {
     //code to create a new user account
     const {email, password } = req.body;   
     const user = new User({ email, password });
-    console.log(user);
-
+    req.session.user = user._id;
     try {
         await user.save();
         // Flash Success 
@@ -72,10 +71,11 @@ exports.login = async (req, res) => {
 };
 
 exports.getSkills = (req, res, next) => {
+    console.log('getSkills called');
     if(req.session.user){
-        res.render("./user/getSkills");
-    } else{
-        res.redirect('/users/login')
+        res.render("/users/getSkills");
+    }else{
+        res.redirect('/users/login');
     }
         
     
@@ -121,4 +121,13 @@ exports.addSkills = async (req, res, next) => {
     } catch (error) {
         res.status(500).json({ error });
     }
+};
+exports.logout = (req, res, next) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Logout error:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        res.redirect('/');
+    });
 };

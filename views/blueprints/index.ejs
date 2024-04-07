@@ -1,11 +1,50 @@
+<!-- include header.ejs from the partials file -->
+<%- include('../partials/header.ejs')%>
+<br>
+<head>
+    <style>
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin-top: 10px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  flex: 1;
+}
+
+#index-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+}
+img{
+    /* make the width of this to be around 200px, but do not stretch the image */
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+    </style>
+</head>
 <div class="container">
     <!-- create this exact code but using ejs and a bluepring object -->
     <% for(let i = 0; i < blueprints.length; i++) { %>
       <% if(i % 4 === 0) { %>
-        <div class="row" id="index-items">
+        <div class="row" id="index-items" >
       <% } %>
-      <div class="item col-6" onclick="location.href='/blueprints/<%=blueprints[i].id%>'" style="cursor: pointer;">
-        <img src="/" alt="some image here" />
+      <div style="margin: 15px;" class="item col-6" onclick="location.href='/blueprints/<%=blueprints[i].id%>'" style="cursor: pointer;">
+        <img src="/imgs/bplogo.png" alt="some image here" />
         <p class="blueprint-name">
           <strong>
             <%let name = blueprints[i].blueprintName;%>
@@ -15,7 +54,7 @@
             <%=name.toUpperCase()%>
           </strong>
         </p>
-        <p>Experience: <strong><%=blueprints[i].experiences%></strong></p>
+        <!-- <p>Experience: <strong><%=blueprints[i].experiences%></strong></p> -->
         <hr />
         <strong><p class="">Something here</p></strong>
         

@@ -15,12 +15,11 @@ const host = 'localhost';
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+
 
 mongoose.connect(uri, {})
     .then(() => {
@@ -38,7 +37,10 @@ mongoose.connect(uri, {})
       cookie: {maxAge: 60 * 60 * 1000}
 
     }))
-
+    app.get('/', (req, res) => {
+  
+      res.render('index', { id: req.session.user });
+    });
 app.use((req,res,next)=>{
   res.locals.user = req.session.user || null;
   next();

@@ -1,13 +1,88 @@
-<form action="/blueprints/job">
-    <label for="position">Position:</label>
-    <input type="text" name="position" id="position">
-    <br />
-    <label for="description">Description:</label>
-    <input type="text" name="description" id="description">
-    <br />
-    <label for="qualifications">Qualifications:</label>
-    <input type="text" name="qualifications" id="qualifications">
-    <br />
-    
-    <input type="submit" value="Submit">
-</form>
+<%- include('../partials/header.ejs')%>
+
+<div class="container">
+    <h1>Enter Job Details</h1>
+    <form action="/blueprints/job" method="POST" class="job-form">
+        <label for="position">Position:</label>
+        <input type="text" name="position" id="position" placeholder="Enter position" required>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" placeholder="Enter description" required>
+        <label for="qualifications">Qualifications:</label>
+        <input type="text" name="qualifications" id="qualifications" placeholder="Enter qualifications" required>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<style>
+    body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+nav {
+    background-color: #15639f;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #15639f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0e4d80;
+}
+</style>
