@@ -1,15 +1,20 @@
 <div>
     <h1><%= blueprint.blueprintName %></h1>
-    <p>Created by: <%= user.email%></p>
-    <h2>Job: <%= job.position%></h2>
-    <p><%= job.description%></p>
-    <p><%= job.qualifications%></p>
+    <p>Created by: <%= user.email %></p>
+    <h2>Job: <%= job.position %></h2>
+    <p><%= job.description %></p>
+    <p><%= job.qualifications %></p>
     <hr>
     <%for(let i=0; i<blueprint.experiences.length; i++){ %>
-        <p><%= blueprint.experiences[i]%></p>
+        <p>Experience # <%= i+1 %></p>
+        <p>Experience Name: <%= blueprint.experiences[i].experienceName %></p>
+        <p>Role: <%= blueprint.experiences[i].role %> </p>
+        <p>Responsibilities: <%= blueprint.experiences[i].Responsibilities %></p>
+        <p>Duration: <%= blueprint.experiences[i].years %> years</p>
+        <p>Location: <%= blueprint.experiences[i].location %></p>
     <%}%>
 
-    <p><%= blueprint.nextSteps%></p>
+    <p>Next steps: <%= blueprint.nextSteps %></p>
 
 
     <a href="/blueprints">Back</a>
