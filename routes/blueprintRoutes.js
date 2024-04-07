@@ -18,5 +18,4 @@ router.get('/create', controller.getLoading); // shows a loading screen while ai
 router.post('/create', controller.finishBlueprint); // show the newly created blueprint w/ next steps, timeline, etc
 
 router.get('/:id', controller.show); // show a single blueprint
-
 module.exports = router;
