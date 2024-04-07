@@ -2,42 +2,68 @@
     <h1>This is the user skills page</h1>
     <form action="/users/addSkills" method = 'POST'>
 
-        <label for="skills">Relevent Skills:</label>
-        <input type="text" name="skills" id="skills" placeholder="Skills">
-
+            <p>Relevent Skills</p>        
+            <div id= "skillsContainer">
+                <div class = "skillsInputWrapper">
+                    <input type = "text" name = "skills[]" class = "skillInput" placeholder="Insert Skill">
+                </div>
+            </div>
+        <button type = "button" id="addSkillButton">ADD</button>
         <br>
 
+        <p>Education</p>
+        <label for="highestEdu">Highest Level of Education:</label>
+        <input type="text" name="highestEdu" id="highestEdu">
+        <br>
         <label for="eduGpa">GPA:</label>
         <input type="number" name="eduGpa" id="eduGpa" placeholder="0.00">
 
         <br>
 
+
         <p>Experience: </p>
-        <label for="years">Years:</label>
-        <input type="text" name="years" id="years" placeholder="Years">
 
-        <br>
-        <label for="role">Role:</label>
-        <input type="text" name="role" id="role">
+        <div id="experiencesContainer">
+                
+            <label for="years">Years:</label>
+                <div class="experiencesYearsInputWrapper">
+                    <input type="text" name="years[]" class="years">
+                </div>
+                
+                <br>
+                
+                <div class="experiencesRoleInputWrapper">
+                    <label for="role">Role:</label>
+                    <input type="text" name="role[]" class="role">
+                </div>
+
+                <br>
+
+                <div class="experiencesRespInputWrapper">
+                    <label for="responibilities">Responsibilities:</label>
+                    <input type="text" name="responsibilities[]" class="responibilities">
+                </div>
+
+                <br>
+
+                <div class="experiencesExperienceNameInputWrapper">
+                    <label for="experienceName">Experience name:</label>
+                    <input type="text" name="experienceName[]" class="experienceName">
+                </div>
+                
+                <br>
+
+                <div class="experiencesLocationInputWrapper">
+                    <label for="location">Location:</label>
+                    <input type="text" name="location[]" class="location">
+                </div>
+                
+        </div>
+            <button type = "button" id="addExperienceButton">ADD</button>
+
         
-        <br>
-        <label for="responibilities">Responibilities:</label>
-        <input type="text" name="responibilities" id="responibilities">
-
-        <br>
-
-        <label for="experienceName">Experience name:</label>
-        <input type="text" name="experienceName" id="experienceName">
-        <br>
-
-        <label for="location">location:</label>
-        <input type="text" name="location" id="location">
-
-        <br>
-
-        <label for="highestEdu">Highest Level of Education:</label>
-        <input type="text" name="highestEdu" id="highestEdu" placeholder="Education">
         
+
         <br>
 
         <input type="submit" value="SUBMIT" />
@@ -46,3 +72,72 @@
 
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addSkillButton = document.getElementById('addSkillButton');
+        const skillsContainer = document.getElementById('skillsContainer');
+
+        addSkillButton.addEventListener('click', function () {
+            const newSkillInputWrapper = document.createElement('div');
+            newSkillInputWrapper.className = 'skillInputWrapper';
+
+            const newSkillInput = document.createElement('input');
+            newSkillInput.type = 'text';
+            newSkillInput.name = 'skills[]';
+            newSkillInput.className = 'skillInput';
+            newSkillInput.placeholder = 'Insert Skill';
+
+            const removeSkillBtn = document.createElement('button');
+            removeSkillBtn.type = 'button';
+            removeSkillBtn.className = 'removeSkillBtn';
+            removeSkillBtn.textContent = 'x';
+
+            newSkillInputWrapper.appendChild(newSkillInput);
+            newSkillInputWrapper.appendChild(removeSkillBtn);
+            skillsContainer.appendChild(newSkillInputWrapper);
+
+            // Add event listener for the new "x" button
+            removeSkillBtn.addEventListener('click', function () {
+                newSkillInputWrapper.remove();
+            });
+        });
+
+        const addExperienceButton = document.getElementById('addExperienceButton');
+        const experiencesContainer = document.getElementById('experiencesContainer');
+
+        addExperienceButton.addEventListener('click', function () {
+            const newExperienceWrapper = document.createElement('div');
+            newExperienceWrapper.className = 'experienceInputWrapper';
+
+            const newExperienceInputs = [
+                { type: 'text', name: 'years[]', placeholder: 'Years' },
+                { type: 'text', name: 'role[]', placeholder: 'Role' },
+                { type: 'text', name: 'responsibilities[]', placeholder: 'Responsibilities' },
+                { type: 'text', name: 'experienceName[]', placeholder: 'Experience Name' },
+                { type: 'text', name: 'location[]', placeholder: 'Location' }
+            ];
+
+            newExperienceInputs.forEach(inputConfig => {
+                const newInput = document.createElement('input');
+                newInput.type = inputConfig.type;
+                newInput.name = inputConfig.name;
+                newInput.placeholder = inputConfig.placeholder;
+                newExperienceWrapper.appendChild(newInput);
+            });
+
+            const removeExperienceBtn = document.createElement('button');
+            removeExperienceBtn.type = 'button';
+            removeExperienceBtn.className = 'removeExperienceBtn';
+            removeExperienceBtn.textContent = 'x';
+
+            newExperienceWrapper.appendChild(removeExperienceBtn);
+            experiencesContainer.appendChild(newExperienceWrapper);
+
+            // Add event listener for the new "x" button
+            removeExperienceBtn.addEventListener('click', function () {
+                newExperienceWrapper.remove();
+            });
+        });
+    });
+</script>
