@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 const blueprintSchema = new Schema({
     blueprintName: { type: String },
     jobId: { type: Schema.ObjectId },
-    experiences: [{ type: experience }]
-    // add more fields here as necessary
+    experiences: [{ type: experience }],
+    nextSteps: {type: String}
 });
 
 const Blueprint = mongoose.model("blueprint", blueprintSchema);

@@ -2,7 +2,7 @@
 const experience = {
   years: { type: Number }, // for how long
   role: { type: String }, // what position was held
-  responsibilities: [{ type: String }], // duties performed
+  responsibilities: { type: String }, // duties performed
   experienceName: { type: String }, // project, activity, certification, work experience, etc
   location: { type: String } // where
 };
