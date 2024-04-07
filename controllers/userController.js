@@ -73,7 +73,7 @@ exports.getSkills = (req, res, next) => {
     console.log('getSkills called');
     if(req.session.user){
         console.log('user is valid');
-        res.render("/users/getSkills", {id: req.session.user});
+        res.render("user/getSkills", {id: req.session.user});
     }else{
         res.redirect('/users/logIn');
     }
