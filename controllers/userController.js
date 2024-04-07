@@ -54,10 +54,12 @@ exports.login = async (req, res) => {
 };
 
 exports.getSkills = (req, res, next) => {
+    console.log('getSkills called');
     if(req.session.user){
+        console.log('user is valid');
         res.render("/users/getSkills");
     }else{
-        res.redirect('/users/login');
+        res.redirect('/users/logIn');
     }
     
 }
