@@ -93,7 +93,7 @@ exports.getLoading = async (req, res) => {
         console.log('user not found');
     } else{
         console.log('getLoading called');
-        res.render('/blueprints/create', { id: req.session.user });
+        // res.render('/blueprints/create', { id: req.session.user });
         // get necessary user and job info: skills, experiences, 
         let blueprint = await Blueprint.findById(req.session.bpid);
         let job = await Job.findById(blueprint.jobId);
@@ -151,7 +151,7 @@ exports.getLoading = async (req, res) => {
                 blueprint.nextSteps = aiResponse;
                 console.log(blueprint.nextSteps);
                 console.log(blueprint);
-                user.blueprintIds.push(blueprint._id);
+                user.blueprintIds.push(req.session.bpid);
             }
 
             await main();
@@ -164,8 +164,9 @@ exports.getLoading = async (req, res) => {
 
         try {
             await blueprint.save();
+            await user.save();
             console.log('bp saved after ai');
-            res.redirect('/create');
+            res.redirect('/blueprints/');
         } catch (error) {
             console.log('error caught when trying to redirect');
             res.status(500).json({ error });
