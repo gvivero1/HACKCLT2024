@@ -34,7 +34,7 @@ exports.postNew = async (req, res, next) => {
     req.session.user = user._id;
     try {
         await user.save();
-        res.redirect('/user/login');
+        res.redirect('/users/getSkills');
     } catch (error) {
         res.status(500).json({ error });
     }
