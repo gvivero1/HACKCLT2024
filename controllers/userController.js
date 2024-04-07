@@ -34,8 +34,6 @@ exports.postNew = async (req, res, next) => {
     req.session.user = user._id;
     try {
         await user.save();
-        // Flash Success 
-        req.flash('success', 'Account has been created');
         res.redirect('/user/login');
     } catch (error) {
         res.status(500).json({ error });
@@ -79,9 +77,6 @@ exports.getSkills = (req, res, next) => {
     }else{
         res.redirect('/users/logIn');
     }
-        
-    
-    
 }
 
 exports.addSkills = async (req, res, next) => {
