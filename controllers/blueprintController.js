@@ -148,7 +148,7 @@ exports.getLoading = async (req, res) => {
                         { role: "user", content: allSkills }, // gives user skills
                     ],
                     model: "gpt-3.5-turbo-0125",
-                    response_format: { type: "json_object" },
+                    response_format: { type: "string" },
                 });
                 console.log('ai response to follow');
                 let aiResponse = completion.choices[0].message.content;
