@@ -1,5 +1,10 @@
-<form action="/blueprints/start" method="POST">
-    <label for="blueprintName">Blue Print Name:</label>
-    <input type="blueprintName" name="blueprintName" placeholder="blueprintName">
-    <input type="submit" value="Submit">
-</form>
+<%- include('../partials/header.ejs')%>
+
+<div class="container">
+    <h1> Create a Blueprint</h1>
+    <form action="/blueprints/start" method="POST" class="blueprint-form">
+        <label for="blueprintName">Choose a name for your blueprint:</label>
+        <input type="text" name="blueprintName" id="blueprintName" placeholder="Enter Blueprint name" required>
+        <input type="submit" value="Submit">
+    </form>
+</div>
