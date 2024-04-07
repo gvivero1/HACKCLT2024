@@ -20,7 +20,7 @@ exports.index = async (req, res) => {
     // If user is found, proceed with fetching blueprints
     let blueprintIds = user.blueprintIds; // get the list of the user's blueprint ids
     let blueprints = await Promise.all(blueprintIds.map(id => Blueprint.findById(id)));
-    
+
     // Render the page with the blueprints
     res.render('blueprints/index', { blueprints, id: req.session.user});
 };
@@ -53,7 +53,6 @@ exports.createJob = async (req, res, next) => {
     let jobId = job._id;
     let blueprint = await Blueprint.findById(req.session.bpid);
     blueprint.jobId = jobId;
-    blueprint.position = position;
     console.log('createJob called');
     console.log(job);
     console.log(blueprint);
