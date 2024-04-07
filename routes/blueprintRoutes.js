@@ -5,8 +5,6 @@ const router = express.Router();
 
 router.get('/', controller.index); // show all blueprints
 
-
-
 router.get('/start', controller.showStart); // show the create blueprint start screen - input blueprint name and add experiences
 
 router.post('/start', controller.start); // create a new blueprint and add the name to it
