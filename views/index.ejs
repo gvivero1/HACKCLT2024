@@ -1,21 +1,39 @@
 
     <%- include('./partials/header.ejs') %>
 
-    <h1>This is The BluePrintInternship Front Page</h1>
+    <h1>Welcome to BluePrintInternship</h1>
 
     <div class="summary">
-        <h2>Welcome to The BlueprInternship</h2>
-        <p>At The BlueprInternship, we're are dedicated to helping you land your deam internship by proving powerful tools and resources tailored to your needs.</p>
+        <p>At BluePrintInternship, we're are dedicated to helping you land your deam internship by proving powerful tools and resources tailored to your needs.</p>
         <h3>Features:</h3>
         <ol>
             <li><strong>Job Details:</strong> Easily input and manage all the necessary details about your desired internship position. Whether it's the intern title, company name, or location we've got you covered.</li>
             <li><strong>Skills and Experience:</strong>  Tell us about your skills and experience, and we'll help you showcase them effectively to potential employers. Our platform guides you on how to highlight your strengths and stand out in the field.</li>
             <li><strong>OpenAI Integration:</strong> We leverage the cutting-edge capabilities of OpenAI's API to supercharge your internship search. By analysing your input and generating tailored promts, we help you refine your application materials and improve your chances of success.</li>
-            <li><strong>Interview Odds Calculator:</strong> Wondering what your chances are of landing that interview? Our unique feature calculates the likelihood based on your profile and provides detailed insights into how you can improve your odds.</li>
-            <li><strong>Resume Parsing:</strong> Upload your resume, and our system will extract relevant information to streamline your application process. Say goodbye to manual data entry and hello to efficiency!</li>
             <li><strong>Personalized Timeline:</strong> Every journey is unique. That's why we offer a personalized timeline feature that adapts to your pace and goals. Whether you're a recent college student or near to being a graduate, we'll guide you through each step of the internship search process.</li>   
             
         </ol>
-        <p>Join us today and take the first step towards a successful career!</p>
+        <p><strong>Join us today and take the first step towards a successful career!</strong></p>
+        
+        <a href="/blueprints/start">
+            <button class="cta-button">Create BluePrint Now</button>
+        </a>
+        <style>
+            .cta-button {
+                display: inline-block;
+                background-color: #15639f;
+                color: white;
+                text-align: center;
+                padding: 14px 20px;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        
+            .cta-button:hover {
+                background-color: #0d4b77;
+            }
+        </style>
     </div>
 

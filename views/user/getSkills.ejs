@@ -1,76 +1,42 @@
 <%- include('../partials/header.ejs')%>
-<div>
-    <h1>This is the user skills page</h1>
-    <form action="/users/addSkills" method = 'POST'>
+<div class="container">
+    <h1>Personalize Your Profile Here!</h1>
+    <p>Provide your relevant skills, education, and experience to make a profile that we can use to create your BluePrint! You may add as many Relevant Skills as you want by just clicking the Add button. Once you have everything filled in you have the option to Add another Profile for a different Internship Job.</p>
 
-            <p>Relevent Skills</p>        
+    <form action="/users/addSkills" method = 'POST' class="user-form">
+            <div class="skills-section">
+            <label for= "skills">Relevent Skills</label>      
             <div id= "skillsContainer">
                 <div class = "skillsInputWrapper">
                     <input type = "text" name = "skills[]" class = "skillInput" placeholder="Insert Skill">
                 </div>
             </div>
-        <button type = "button" id="addSkillButton">ADD</button>
-        <br>
-
-        <p>Education</p>
-        <label for="highestEdu">Highest Level of Education:</label>
-        <input type="text" name="highestEdu" id="highestEdu">
-        <br>
-        <label for="eduGpa">GPA:</label>
-        <input type="number" name="eduGpa" id="eduGpa" placeholder="0.00">
-
-        <br>
-
-
-        <p>Experience: </p>
-
-        <div id="experiencesContainer">
-                
-            <label for="years">Years:</label>
-                <div class="experiencesYearsInputWrapper">
-                    <input type="text" name="years[]" class="years">
-                </div>
-                
-                <br>
-                
-                <div class="experiencesRoleInputWrapper">
-                    <label for="role">Role:</label>
-                    <input type="text" name="role[]" class="role">
-                </div>
-
-                <br>
-
-                <div class="experiencesRespInputWrapper">
-                    <label for="responibilities">Responsibilities:</label>
-                    <input type="text" name="responsibilities[]" class="responibilities">
-                </div>
-
-                <br>
-
-                <div class="experiencesExperienceNameInputWrapper">
-                    <label for="experienceName">Experience name:</label>
-                    <input type="text" name="experienceName[]" class="experienceName">
-                </div>
-                
-                <br>
-
-                <div class="experiencesLocationInputWrapper">
-                    <label for="location">Location:</label>
-                    <input type="text" name="location[]" class="location">
-                </div>
-                
+        <button type = "button" id="addSkillButton">Add</button>
         </div>
-            <button type = "button" id="addExperienceButton">ADD</button>
 
-        
-        
+        <div class="education-section">
+            <label for="highestEdu">Highest Level of Education</label>
+            <input type="text" name="highestEdu" id="highestEdu" placeholder="Enter Education Level">
+            <br>
+            <label for="eduGpa">GPA</label>
+            <input type="number" name="eduGpa" id="eduGpa" placeholder="0.00">
+        </div>
 
-        <br>
+        <div class="experience-section">
+            <label>Experience</label>
+            <div id="experiencesContainer">
+                <div class="experienceInputWrapper">
+                    <input type="text" name="years[]" class="years" placeholder="Years">
+                    <input type="text" name="role[]" class="role" placeholder="Role">
+                    <input type="text" name="responsibilities[]" class="responsibilities" placeholder="Responsibilities">
+                    <input type="text" name="experienceName[]" class="experienceName" placeholder="Experience Name">
+                    <input type="text" name="location[]" class="location" placeholder="Location">
+                </div>
+            </div>
+            <button type="button" id="addExperienceButton">Add</button>
+        </div>
 
-        <input type="submit" value="SUBMIT" />
-
-
-
+        <input type="submit" value="SUBMIT" class="submit-button" />
     </form>
 </div>
 
@@ -142,3 +108,68 @@
         });
     });
 </script>
+<style>
+    .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.skills-section,
+.education-section,
+.experience-section {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#skillsContainer,
+#experiencesContainer {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #15639f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0e4d80;
+}
+
+.submit-button {
+    background-color: #15639f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    }
+
+    .submit-button:hover {
+        background-color: #0e4f81;
+    }
+</style>
