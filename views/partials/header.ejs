@@ -49,11 +49,13 @@
 <body>
     <nav>
         <a href="#">Homepage</a>
+        <% if(!id){%>
         <a href="/users/login">Login</a>
         <a href="/users/new">Signup</a>
+        <%}else{%>
         <a href="/Create BluePrint">Create BluePrint</a>
         <a href="/My BluePrint">My BluePrint</a>
-        
+        <%}%>
     </nav>
 </body>
 </html>

@@ -2,7 +2,7 @@ const User = require('../models/user');
 const experience = require('../models/experience');
 exports.getUserLogin = (req, res, next) => {
     if(!req.session.User){
-        res.render("./user/login");
+        res.render("./user/login", {id: req.session.user});
     }else{
         res.redirect('/');
     }
@@ -10,7 +10,7 @@ exports.getUserLogin = (req, res, next) => {
 };
 
 exports.getNew = (req, res, next) => {
-    res.render("./user/new");
+    res.render("./user/new", {id: req.session.user});
 }
 
 exports.postNew = async (req, res, next) => {
@@ -20,7 +20,7 @@ exports.postNew = async (req, res, next) => {
 
     try {
         await user.save();
-        res.redirect('/users/login');
+        res.redirect('/users/login', {id: req.session.user});
     } catch (error) {
         res.status(500).json({ error });
     }
@@ -57,7 +57,7 @@ exports.getSkills = (req, res, next) => {
     console.log('getSkills called');
     if(req.session.user){
         console.log('user is valid');
-        res.render("/users/getSkills");
+        res.render("/users/getSkills", {id: req.session.user});
     }else{
         res.redirect('/users/logIn');
     }

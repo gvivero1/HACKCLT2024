@@ -22,7 +22,7 @@ exports.index = async (req, res) => {
     let blueprints = await Promise.all(blueprintIds.map(id => Blueprint.findById(id)));
 
     // Render the page with the blueprints
-    res.render('blueprints/index', { blueprints });
+    res.render('blueprints/index', { blueprints, id: req.session.user});
 };
 
 // show one specific blueprint
@@ -30,7 +30,7 @@ exports.show = (req, res, next) => {
     let blueprintId = req.params.id;
     Blueprint.findById(blueprintId).then((blueprint) => {
         if(blueprint){
-            res.render('blueprints/show', blueprint)
+            res.render('blueprints/show', {blueprint , id: req.session.user})
         } else{
             let err = new Error("Blueprint not found");
             err.status = 404;
@@ -40,7 +40,7 @@ exports.show = (req, res, next) => {
 };
 
 exports.showJob = async (req, res) => {
-    res.render('blueprints/job');
+    res.render('blueprints/job', { id: req.session.user });
 };
 
 
@@ -68,7 +68,7 @@ exports.createJob = async (req, res, next) => {
 
 exports.showStart = async (req, res) => {
     console.log('show start called');
-    res.render('blueprints/start');
+    res.render('blueprints/start', { id: req.session.user });
 };
 
 exports.start = async (req, res, next) => {
@@ -92,7 +92,7 @@ exports.start = async (req, res, next) => {
 
 exports.getLoading = async (req, res) => {
     console.log('getLoading called');
-    res.render('/blueprints/create');
+    res.render('/blueprints/create', { id: req.session.user });
     // add code to contact ai, give it context and start getting the response
     
     const openai = new OpenAI(config.apiKEY);
