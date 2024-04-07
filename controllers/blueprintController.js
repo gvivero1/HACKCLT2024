@@ -1,17 +1,14 @@
-// At the top of your file, ensure you're loading environment variables if you're using a .env file
-require('dotenv').config();
 
 const Job = require('../models/job');
 const User = require('../models/user');
 const Blueprint = require('../models/blueprint');
-const { OpenAI } = require("openai");
-
-
-
+const OpenAI = require("openai");
+const config = require("../config")
 
 // Show all blueprints
 exports.index = async (req, res) => {
     // Attempt to fetch the user
+    console.log('blueprint index called');
     let user = await User.findById(req.session.user); // get current user
 
     // Check if user was found before proceeding
@@ -20,7 +17,85 @@ exports.index = async (req, res) => {
         return res.status(404).send('User not found');
     }
 
-    const openai = new OpenAI();
+    // If user is found, proceed with fetching blueprints
+    let blueprintIds = user.blueprintIds; // get the list of the user's blueprint ids
+    let blueprints = await Promise.all(blueprintIds.map(id => Blueprint.findById(id)));
+
+    // Render the page with the blueprints
+    res.render('blueprints/index', { blueprints });
+};
+
+// show one specific blueprint
+exports.show = (req, res, next) => {
+    let blueprintId = req.params.id;
+    Blueprint.findById(blueprintId).then((blueprint) => {
+        if(blueprint){
+            res.render('blueprints/show', blueprint)
+        } else{
+            let err = new Error("Blueprint not found");
+            err.status = 404;
+            next(err);
+        }
+    });
+};
+
+exports.showJob = async (req, res) => {
+    res.render('blueprints/job');
+};
+
+
+exports.createJob = async (req, res, next) => {
+    const { position, description, qualifications } = req.body;
+    let job = new Job({position, description, qualifications});
+    let jobId = job._id;
+    let blueprint = await Blueprint.findById(req.session.bpid);
+    blueprint.jobId = jobId;
+
+    console.log(job);
+    console.log(blueprint);
+
+    try {
+        await job.save();
+        await blueprint.save();
+        // Flash Success
+        req.flash('success', 'Job added');
+        res.redirect('blueprints/create');
+    } catch (error) {
+        res.status(500).json({ error });
+    }
+
+};
+
+exports.showStart = async (req, res) => {
+    console.log('show start called');
+    res.render('blueprints/start');
+};
+
+exports.start = async (req, res, next) => {
+    console.log('blueprint start called');
+    const blueprintName = req.body.blueprintName;
+    const bp = new Blueprint({blueprintName});
+    req.session.bpid = bp._id;
+    try {
+        console.log('try save');
+        await bp.save();
+        console.log('bp saved');
+        // Flash Success
+        // req.flash('success', 'Blueprint started');
+        console.log('try redirect to job');
+        res.redirect('/blueprints/job');
+    } catch (error) {
+        console.error();
+        res.status(500).json({ error });
+    }
+};
+
+exports.getLoading = async (req, res) => {
+    console.log('getLoading called');
+    res.render('/blueprints/create');
+    // add code to contact ai, give it context and start getting the response
+    
+    const openai = new OpenAI(config.apiKEY);
     try {
         async function main() {
             const completion = await openai.chat.completions.create({
@@ -51,6 +126,7 @@ exports.index = async (req, res) => {
             });
 
             console.log(completion.choices[0].message.content);
+            responseGenerated = true;
         }
 
         await main();
@@ -59,79 +135,7 @@ exports.index = async (req, res) => {
         console.error("Error calling OpenAI:", error);
         // Optionally handle the OpenAI API call error, e.g., by logging or sending a specific response
     }
-
-    // If user is found, proceed with fetching blueprints
-    let blueprintIds = user.blueprintIds; // get the list of the user's blueprint ids
-    let blueprints = await Promise.all(blueprintIds.map(id => Blueprint.findById(id)));
-
-    // Render the page with the blueprints
-    res.render('blueprints/index', { blueprints });
-};
-
-// show one specific blueprint
-exports.show = (req, res, next) => {
-    let blueprintId = req.params.id;
-    Blueprint.findById(blueprintId).then((blueprint) => {
-        if(blueprint){
-            res.render('/blueprints/show', blueprint)
-        } else{
-            let err = new Error("Blueprint not found");
-            err.status = 404;
-            next(err);
-        }
-    });
-};
-
-exports.showJob = async (req, res) => {
-    res.render('/job');
-};
-
-
-exports.createJob = async (req, res, next) => {
-    const { position, description, qualifications } = req.body;
-    let job = new Job({position, description, qualifications});
-    let id = job._id;
-    let blueprint = await Blueprint.findById(blueprintId);
-    blueprint.jobId = id;
-
-    console.log(job);
-    console.log(blueprint);
-
-    try {
-        await job.save();
-        await blueprint.save();
-        // Flash Success
-        req.flash('success', 'Job added');
-        res.redirect('/loading');
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-
-};
-
-exports.showStart = async (req, res) => {
-    res.render('/start');
-};
-
-exports.start = async (req, res, next) => {
-    const blueprintName = req.body.blueprintName;
-    let user = User.findById(req.session.user);
-    let experiences = user.experiences;
-    const bp = new Blueprint({blueprintName, experiences});
-    blueprintId = bp._id;
-    try {
-        await bp.save();
-        // Flash Success
-        req.flash('success', 'Blueprint started');
-        res.redirect('/enterJob');
-    } catch (error) {
-        res.status(500).json({ error });
-    }
-};
-
-exports.getLoading = async (req, res) => {
-    res.render('blueprints/create');
-    // add code to contact ai, give it context and start getting the response
+    
 
 };
 
