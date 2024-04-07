@@ -16,4 +16,6 @@ router.get("/getSkills", controller.getSkills);
 
 router.post("/addSkills", controller.addSkills);
 
+router.get("/logout", controller.logout);
+
 module.exports = router;

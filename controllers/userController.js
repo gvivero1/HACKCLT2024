@@ -82,3 +82,12 @@ exports.addSkills = async (req, res, next) => {
         res.status(500).json({ error });
     }
 };
+exports.logout = (req, res, next) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Logout error:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        res.redirect('/');
+    });
+};
