@@ -15,6 +15,7 @@ exports.getIndex = (req, res, next) => {
 
 exports.getUserLogin = (req, res, next) => {
     if(!req.session.User){
+
         res.render("./user/login", {id: req.session.user});
     }else{
         res.redirect('/');
@@ -73,9 +74,10 @@ exports.login = async (req, res) => {
 exports.getSkills = (req, res, next) => {
     console.log('getSkills called');
     if(req.session.user){
-        res.render("/users/getSkills");
+        console.log('user is valid');
+        res.render("/users/getSkills", {id: req.session.user});
     }else{
-        res.redirect('/users/login');
+        res.redirect('/users/logIn');
     }
         
     
