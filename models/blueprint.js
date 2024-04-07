@@ -6,7 +6,8 @@ const blueprintSchema = new Schema({
     blueprintName: { type: String },
     jobId: { type: Schema.ObjectId },
     experiences: [{ type: experience }],
-    nextSteps: {type: String}
+    nextSteps: {type: String},
+    position: { type: String },
 });
 
 const Blueprint = mongoose.model("blueprint", blueprintSchema);
