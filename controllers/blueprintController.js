@@ -26,17 +26,20 @@ exports.index = async (req, res) => {
 };
 
 // show one specific blueprint
-exports.show = (req, res, next) => {
+exports.show = async(req, res, next) => {
     let blueprintId = req.params.id;
-    Blueprint.findById(blueprintId).then((blueprint) => {
-        if(blueprint){
-            res.render('blueprints/show', {blueprint , id: req.session.user})
-        } else{
-            let err = new Error("Blueprint not found");
-            err.status = 404;
-            next(err);
-        }
-    });
+    let user = await User.findById(req.session.user);
+    let blueprint = await Blueprint.findById(blueprintId);
+    let job = await Job.findById(blueprint.jobId);
+    
+
+    if(blueprint){
+        res.render('blueprints/show', {blueprint, user, job , id: req.session.user})
+    } else{
+        let err = new Error("Blueprint not found");
+        err.status = 404;
+        next(err);
+    }
 };
 
 exports.showJob = async (req, res) => {
